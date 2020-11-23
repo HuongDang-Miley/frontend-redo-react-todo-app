@@ -22,7 +22,11 @@ export default class App extends Component {
     inputValue: "",
     submitError: false,
     submitErrorMessage: "",
+    noTodo: false,
+    noTodoMessage: ""
   }
+
+
 
   handleInputChange = (event) => {
     this.setState({
@@ -30,14 +34,14 @@ export default class App extends Component {
     })
   }
 
-  handleOnSubmit = (event) => {
+  handleAddButton = (event) => {
     // prevent page from auto refresh after submitting the input
     event.preventDefault()
 
     if (this.state.inputValue === '') {
       this.setState({
         submitError: true,
-        submitErrorMessage: "please type something"
+        submitErrorMessage: "please type something",
       })
       return;
     }
@@ -50,19 +54,43 @@ export default class App extends Component {
     this.setState({
       todoList: newTodoList,
       submitError: false,
-      inputValue: ""
+      inputValue: "",
+      noTodo: false
     })
   }
 
-  handleOnDelete = (id) => {
+
+  handleDeleteButton = (id) => {
     let newTodoList = this.state.todoList.filter((item) => item.id !== id)
     this.setState({
       todoList: newTodoList
-    })
+    }
+      ,
+      () => {
+        if (newTodoList.length === 0) {
+          this.setState({
+            noTodo: true,
+            noTodoMessage: "You don't have any todo, please add some"
+          })
+        }
+      }
+    )
+
+
+  }
+
+  handEditButton = (id) => {
+    console.log('from App.js line 65')
   }
 
   render() {
-    let { todoList, inputValue, submitError, submitErrorMessage } = this.state
+    let { todoList,
+      inputValue,
+      submitError,
+      submitErrorMessage,
+      noTodo,
+      noTodoMessage
+    } = this.state
     return (
       <div>
         {submitError ? <p className="error-message">{submitErrorMessage}</p> : ""}
@@ -75,11 +103,19 @@ export default class App extends Component {
           ></input>
           <button
             className="edit"
-            onClick={this.handleOnSubmit}
+            onClick={this.handleAddButton}
           >Add</button>
         </form>
+        {noTodo
+          ? <p className="general-message">{noTodoMessage}</p>
+          : <TodoList
+            todoList={todoList}
+            handleDeleteButton={this.handleDeleteButton}
+            handEditButton={this.handEditButton}
+          />
+        }
 
-        <TodoList todoList={todoList} handleOnDelete={this.handleOnDelete} />
+
       </div>
     )
   }
