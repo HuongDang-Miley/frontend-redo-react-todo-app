@@ -24,13 +24,17 @@ export default class App extends Component {
     let { todoList } = this.state
     return (
       <div>
+        <form>
+          <input></input>
+        <button className="edit">Submit</button>
+        </form>
         {todoList.map(item => {
           return (
             <>
               <li>
                 {item.name}
-                <button>edit</button>
-                <button>delete</button>
+                <button className="edit">Edit</button>
+                <button className="delete">Delete</button>
               </li>
             </>
           )
