@@ -25,3 +25,8 @@ button {
 .delete {
   background-color: crimson;
 }
+
+.error-message {
+  color: red;
+  font-weight: semi-bold;
+}

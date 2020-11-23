@@ -19,6 +19,8 @@ export default class App extends Component {
       }
     ],
     inputValue: "",
+    submitError: false,
+    submitErrorMessage: "",
   }
 
   handleInputChange = (event) => {
@@ -27,14 +29,35 @@ export default class App extends Component {
     })
   }
 
-  handleAddTodo = (event) => {
-   
+  handleOnSubmit = (event) => {
+    event.preventDefault()
+
+    if (this.state.inputValue === '') {
+      this.setState({
+        submitError: true,
+        submitErrorMessage: "please type something"
+      })
+      return;
+    }
+
+    let newTodo = {
+      id: uuidv4(),
+      name: this.state.inputValue
+    }
+    let newTodoList = [...this.state.todoList]
+    newTodoList.push(newTodo)
+    this.setState({
+      todoList: newTodoList,
+      submitError: false,
+      inputValue: ""
+    })
   }
 
   render() {
-    let { todoList, inputValue } = this.state
+    let { todoList, inputValue, submitError, submitErrorMessage } = this.state
     return (
       <div>
+        {submitError ? <p className ="error-message">{submitErrorMessage}</p> : ""}
         <form>
           <input
             onChange={this.handleInputChange}
@@ -44,7 +67,7 @@ export default class App extends Component {
           ></input>
           <button
             className="edit"
-            onClick={this.handleAddTodo}
+            onClick={this.handleOnSubmit}
           >Add</button>
         </form>
         {todoList.map(({ id, name }) => {
