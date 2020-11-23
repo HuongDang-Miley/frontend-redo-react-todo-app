@@ -9,21 +9,24 @@ export default class App extends Component {
       {
         id: uuidv4(),
         name: 'redo React',
+        ToggleEdit: false
       },
       {
         id: uuidv4(),
         name: 'forward order on eBay',
+        ToggleEdit: false
       },
       {
         id: uuidv4(),
         name: 'place order on SheIn',
+        ToggleEdit: false
       }
     ],
     inputValue: "",
     submitError: false,
     submitErrorMessage: "",
     noTodo: false,
-    noTodoMessage: ""
+    noTodoMessage: "",
   }
 
 
@@ -70,7 +73,7 @@ export default class App extends Component {
         if (newTodoList.length === 0) {
           this.setState({
             noTodo: true,
-            noTodoMessage: "You don't have any todo, please add some"
+            noTodoMessage: "You don't have any todo, please add todo"
           })
         }
       }
@@ -80,7 +83,38 @@ export default class App extends Component {
   }
 
   handEditButton = (id) => {
-    console.log('from App.js line 65')
+    console.log(id)
+    let copyTodoList = [...this.state.todoList]
+    for (const item of copyTodoList) {
+      if (item.id === id) {
+        item.ToggleEdit = true
+      } else {
+        item.ToggleEdit= false
+      }
+    }
+    console.log(copyTodoList)
+    this.setState({
+     todoList: copyTodoList
+    })
+    //  let selectedTodo = copyTodo.map((item) => {
+    //     if ( item.id === id) { item.ToggleEdit = true}
+    //   else {item.ToggleEdit= false}})
+    //   console.log(selectedTodo)
+    // this.setState({
+    //   todoList: selectedTodo
+    // })
+    // this.setState({
+    //   toggleEdit: true,
+    //   toggleEditAndUpdate: 'Update'
+    // })
+    // this.state.todoList.map(item => {if (item.id === id) })
+    // console.log('from App.js line 65')
+    // let {toggleEditAndUpdate} = this.state
+    // if (toggleEditAndUpdate === 'Edit') {
+    //   this.setState({
+    //     toggleEditAndUpdate: "Update"
+    //   })
+    // }
   }
 
   render() {
@@ -89,7 +123,7 @@ export default class App extends Component {
       submitError,
       submitErrorMessage,
       noTodo,
-      noTodoMessage
+      noTodoMessage,
     } = this.state
     return (
       <div>
@@ -101,10 +135,12 @@ export default class App extends Component {
             name="inputValue"
             value={inputValue}
           ></input>
+
           <button
             className="edit"
             onClick={this.handleAddButton}
           >Add</button>
+
         </form>
         {noTodo
           ? <p className="general-message">{noTodoMessage}</p>

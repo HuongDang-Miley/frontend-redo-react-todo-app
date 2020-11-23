@@ -4,14 +4,20 @@ import '../App.css'
 const TodoList = ({ todoList, handleDeleteButton, handEditButton }) => {
 
     return (
-        todoList.map(({ id, name }) => {
+        todoList.map(({ id, name, ToggleEdit }) => {
             return (
                 <li key={id}>{name}
-                    <button
-                        className="edit"
-                        onClick={() => handEditButton(id)}
-                    >Edit</button>
-                    
+                    {ToggleEdit
+                        ? <button
+                            className="edit"
+                            onClick={() => handEditButton(id)}
+                        >Update</button>
+                        : <button
+                            className="edit"
+                            onClick={() => handEditButton(id)}
+                        >Edit</button>
+                    }
+
                     <button
                         className="delete"
                         onClick={() => handleDeleteButton(id)}

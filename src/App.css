@@ -22,6 +22,11 @@ button {
 .edit {
   background-color: dodgerblue;
 }
+
+.disable {
+  background-color: grey;
+  
+}
 .delete {
   background-color: crimson;
 }
