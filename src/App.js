@@ -4,7 +4,6 @@ import './App.css'
 
 export default class App extends Component {
   state = {
-    name: "huong",
     todoList: [
       {
         id: uuidv4(),
@@ -18,7 +17,8 @@ export default class App extends Component {
         id: uuidv4(),
         name: 'place order on SheIn',
       }
-    ]
+    ],
+
   }
   render() {
     let { todoList } = this.state
