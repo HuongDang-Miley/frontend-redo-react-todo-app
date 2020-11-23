@@ -2,6 +2,7 @@ import React from 'react'
 import '../App.css'
 
 const TodoList = ({ todoList, handleOnDelete }) => {
+    
     return (
         todoList.map(({ id, name }) => {
             return (
@@ -10,7 +11,7 @@ const TodoList = ({ todoList, handleOnDelete }) => {
                     <button
                         className="delete"
                         key={id}
-                        onClick={handleOnDelete}
+                        onClick={() => handleOnDelete(id)}
                     >Delete</button>
                 </li>
             )

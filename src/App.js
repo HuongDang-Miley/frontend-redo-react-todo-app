@@ -54,10 +54,11 @@ export default class App extends Component {
     })
   }
 
-  handleOnDelete = (event) => {
-    console.log(this.state)
-    // console.log(event.key)
-    // this.todoList.filter((item) => item.name !== this.)
+  handleOnDelete = (id) => {
+    let newTodoList = this.state.todoList.filter((item) => item.id !== id)
+    this.setState({
+      todoList: newTodoList
+    })
   }
 
   render() {
@@ -77,40 +78,9 @@ export default class App extends Component {
             onClick={this.handleOnSubmit}
           >Add</button>
         </form>
-        {/* {todoList.map(({ id, name }) => {
-          return (
-            <>
-              <li key={id}>
-                {name}
-                <button className="edit">Edit</button>
-                <button
-                className="delete"
-                key ={id}
-                onClick = {this.handleOnDelete}
-                >Delete</button>
-              </li>
-            </>
-          )
-        })} */}
+
         <TodoList todoList={todoList} handleOnDelete={this.handleOnDelete} />
       </div>
     )
   }
 }
-
-// const TodoList = ({ todoList, handleOnDelete }) => {
-//   return (
-//     todoList.map(({ id, name }) => {
-//       return (
-//           <li key={id}>{name}
-//             <button className="edit">Edit</button>
-//             <button
-//               className="delete"
-//               key={id}
-//               onClick={handleOnDelete}
-//             >Delete</button>
-//           </li>
-//       )
-//     })
-//   )
-// }
