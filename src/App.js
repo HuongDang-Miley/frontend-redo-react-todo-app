@@ -18,21 +18,40 @@ export default class App extends Component {
         name: 'place order on SheIn',
       }
     ],
-
+    inputValue: "",
   }
+
+  handleInputChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
+  handleAddTodo = (event) => {
+   
+  }
+
   render() {
-    let { todoList } = this.state
+    let { todoList, inputValue } = this.state
     return (
       <div>
         <form>
-          <input></input>
-        <button className="edit">Submit</button>
+          <input
+            onChange={this.handleInputChange}
+            type="text"
+            name="inputValue"
+            value={inputValue}
+          ></input>
+          <button
+            className="edit"
+            onClick={this.handleAddTodo}
+          >Add</button>
         </form>
-        {todoList.map(item => {
+        {todoList.map(({ id, name }) => {
           return (
             <>
-              <li>
-                {item.name}
+              <li key={id}>
+                {name}
                 <button className="edit">Edit</button>
                 <button className="delete">Delete</button>
               </li>
