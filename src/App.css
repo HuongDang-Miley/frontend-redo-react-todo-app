@@ -4,9 +4,18 @@ div {
   
 }
 
+li {
+  list-style: none;
+}
+
+form {
+  display: inline-block;
+}
+
 input {
   height: 16px;
   padding: 8px;
+  margin-left: 16px;
 }
 
 button {
@@ -21,6 +30,15 @@ button {
 
 .edit {
   background-color: dodgerblue;
+}
+
+.login-button {
+  width: 170px;
+}
+
+.login-form {
+  margin-top: 100px;
+  text-align: center;
 }
 
 .disable {
@@ -38,4 +56,8 @@ button {
 
 .general-message {
   color: blue;
+}
+
+.login-input {
+  margin: 10px;
 }

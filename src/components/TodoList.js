@@ -1,21 +1,38 @@
 import React from 'react'
 import '../App.css'
 
-const TodoList = ({ todoList, handleDeleteButton, handEditButton }) => {
+const TodoList = ({ todoList, 
+    handleDeleteButton, 
+    handEditButton, 
+    handleUpdateButton, 
+    inputValue,
+    handleInputChange }) => {
 
     return (
-        todoList.map(({ id, name, ToggleEdit }) => {
+        todoList.map(({ id, name, toggleEdit }) => {
             return (
-                <li key={id}>{name}
-                    {ToggleEdit
-                        ? <button
-                            className="edit"
-                            onClick={() => handEditButton(id)}
-                        >Update</button>
-                        : <button
-                            className="edit"
-                            onClick={() => handEditButton(id)}
-                        >Edit</button>
+                <li key={id}>
+                    {toggleEdit
+                        ? <form>
+                            <input></input>
+                            <button
+                                // onChange={handleInputChange}
+                                // name="inputValue"
+                                // // value={inputValue}
+                                // value = {inputValue}
+                                // type="text"
+                                // className="edit"
+                                // onClick={handleUpdateButton(id)}
+                            >Update</button>
+                        </form>
+                        :
+                        <>
+                            {name}
+                            <button
+                                className="edit"
+                                onClick={() => handEditButton(id)}
+                            >Edit</button>
+                        </>
                     }
 
                     <button

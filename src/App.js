@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { v4 as uuidv4 } from "uuid";
 import './App.css'
 import TodoList from './components/TodoList'
+import Login from './components/login/Login'
+
 
 export default class App extends Component {
   state = {
@@ -9,19 +11,20 @@ export default class App extends Component {
       {
         id: uuidv4(),
         name: 'redo React',
-        ToggleEdit: false
+        toggleEdit: false
       },
       {
         id: uuidv4(),
         name: 'forward order on eBay',
-        ToggleEdit: false
+        toggleEdit: false
       },
       {
         id: uuidv4(),
         name: 'place order on SheIn',
-        ToggleEdit: false
+        toggleEdit: false
       }
     ],
+    isAuth: false,
     inputValue: "",
     submitError: false,
     submitErrorMessage: "",
@@ -82,39 +85,31 @@ export default class App extends Component {
 
   }
 
-  handEditButton = (id) => {
-    console.log(id)
+  handEditButton = (targetId) => {
+    console.log(targetId)
     let copyTodoList = [...this.state.todoList]
-    for (const item of copyTodoList) {
-      if (item.id === id) {
-        item.ToggleEdit = true
-      } else {
-        item.ToggleEdit= false
+    copyTodoList.map(item => {
+      if (item.id === targetId) {
+        item.toggleEdit = true
       }
-    }
+      // else {
+      //   item.toggleEdit=false
+      // }
+      return item
+    })
+
     console.log(copyTodoList)
     this.setState({
-     todoList: copyTodoList
+      todoList: copyTodoList
     })
-    //  let selectedTodo = copyTodo.map((item) => {
-    //     if ( item.id === id) { item.ToggleEdit = true}
-    //   else {item.ToggleEdit= false}})
-    //   console.log(selectedTodo)
-    // this.setState({
-    //   todoList: selectedTodo
-    // })
-    // this.setState({
-    //   toggleEdit: true,
-    //   toggleEditAndUpdate: 'Update'
-    // })
-    // this.state.todoList.map(item => {if (item.id === id) })
-    // console.log('from App.js line 65')
-    // let {toggleEditAndUpdate} = this.state
-    // if (toggleEditAndUpdate === 'Edit') {
-    //   this.setState({
-    //     toggleEditAndUpdate: "Update"
-    //   })
-    // }
+  }
+
+  handleUpdateButton = (id) => {
+    console.log('this is id in line 0=106', id)
+    console.log(this.state.inputValue)
+    // let copyArr = [...this.state.todoList]
+
+
   }
 
   render() {
@@ -124,31 +119,40 @@ export default class App extends Component {
       submitErrorMessage,
       noTodo,
       noTodoMessage,
+      isAuth
     } = this.state
     return (
       <div>
-        {submitError ? <p className="error-message">{submitErrorMessage}</p> : ""}
-        <form>
-          <input
-            onChange={this.handleInputChange}
-            type="text"
-            name="inputValue"
-            value={inputValue}
-          ></input>
+        {isAuth
+          ? <div>
+            {submitError ? <p className="error-message">{submitErrorMessage}</p> : ""}
+            <form>
+              <input
+                onChange={this.handleInputChange}
+                type="text"
+                name="inputValue"
+                value={inputValue}
+              ></input>
 
-          <button
-            className="edit"
-            onClick={this.handleAddButton}
-          >Add</button>
+              <button
+                className="edit"
+                onClick={this.handleAddButton}
+              >Add</button>
 
-        </form>
-        {noTodo
-          ? <p className="general-message">{noTodoMessage}</p>
-          : <TodoList
-            todoList={todoList}
-            handleDeleteButton={this.handleDeleteButton}
-            handEditButton={this.handEditButton}
-          />
+            </form>
+            {noTodo
+              ? <p className="general-message">{noTodoMessage}</p>
+              : <TodoList
+                todoList={todoList}
+                handleDeleteButton={this.handleDeleteButton}
+                handEditButton={this.handEditButton}
+                handleUpdateButton={this.handleUpdateButton}
+                inputValue={this.state.inputValue}
+                handleInputChange={this.handleInputChange}
+              />
+            }
+          </div>
+          : <Login />
         }
 
 
