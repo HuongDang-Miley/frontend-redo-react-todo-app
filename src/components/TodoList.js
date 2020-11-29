@@ -1,11 +1,11 @@
 import React from 'react'
 import '../App.css'
 
-const TodoList = ({ todoList,
+const TodoList = ({
+    todoList,
     handleDeleteButton,
     handEditButton,
     handleUpdateButton,
-    inputValue,
     handleInputChange,
     editTodoValue }) => {
 

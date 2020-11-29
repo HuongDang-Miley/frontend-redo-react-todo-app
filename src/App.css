@@ -1,4 +1,4 @@
-div {
+.body-div {
   text-align: center;
   margin-top: 56px;
   
@@ -28,6 +28,15 @@ button {
   border-radius: 4px;
 }
 
+.navigation-div {
+margin-top: 24px;
+margin-left: 24px;
+}
+
+a {
+  margin-right: 32px;
+  color: dodgerblue;
+}
 .blue-button {
   background-color: dodgerblue;
 }
@@ -36,8 +45,8 @@ button {
   width: 170px;
 }
 
-.login-form {
-  margin-top: 100px;
+.login-div {
+  margin-top: 40px;
   text-align: center;
 }
 

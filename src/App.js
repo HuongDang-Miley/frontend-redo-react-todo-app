@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import './App.css'
 import TodoList from './components/TodoList'
 import Login from './components/login/Login'
+import Nav from './components/nav/Nav'
 
 
 export default class App extends Component {
@@ -24,13 +25,15 @@ export default class App extends Component {
         toggleEdit: false
       }
     ],
-    isAuth: true,
+    isAuth: false,
     inputValue: "",
     submitError: false,
     submitErrorMessage: "",
     noTodo: false,
     noTodoMessage: "",
     editTodoValue: "",
+    email: "",
+    password: "",
   }
 
 
@@ -39,9 +42,8 @@ export default class App extends Component {
     this.setState({
       [event.target.name]: event.target.value
     })
-    // console.log(this.state)
-    // console.log(this.target.name)
-    // console.log(this.target.value)
+    console.log('event target name', event.target.name)
+    console.log('handleInputChange line 44 App.js', this.state)
   }
 
   handleAddButton = (event) => {
@@ -130,6 +132,19 @@ export default class App extends Component {
 
   }
 
+  handleLoginButton = () => {
+    if (this.state.email === '' && this.state.password === '') {
+      this.setState({
+        isAuth: false
+      })
+      return;
+    }
+
+    this.setState({
+      isAuth: true
+    })
+  }
+
   render() {
     let { todoList,
       inputValue,
@@ -138,47 +153,55 @@ export default class App extends Component {
       noTodo,
       noTodoMessage,
       isAuth,
-      editTodoValue
+      editTodoValue,
+      email,
+      password
     } = this.state
     return (
-      <div>
-        {isAuth
-          ? <div>
-            {submitError ? <p className="error-message">{submitErrorMessage}</p> : ""}
-            <form>
-              <input
-                onChange={this.handleInputChange}
-                type="text"
-                name="inputValue"
-                value={inputValue}
-              ></input>
+      <>
+        <Nav isAuth = {isAuth}/>
+        <div className = 'body-div'> 
+          {isAuth
+            ? <div>
+              {submitError ? <p className="error-message">{submitErrorMessage}</p> : ""}
+              <form>
+                <input
+                  onChange={this.handleInputChange}
+                  type="text"
+                  name="inputValue"
+                  value={inputValue}
+                ></input>
 
-              <button
-                className="blue-button"
-                onClick={this.handleAddButton}
-              >Add</button>
+                <button
+                  className="blue-button"
+                  onClick={this.handleAddButton}
+                >Add</button>
 
-            </form>
-            {noTodo
-              ? <p className="general-message">{noTodoMessage}</p>
-              : <TodoList
-                todoList={todoList}
-                handleDeleteButton={this.handleDeleteButton}
-                handEditButton={this.handEditButton}
-                handleUpdateButton={this.handleUpdateButton}
-                inputValue={this.state.inputValue}
-                handleInputChange={this.handleInputChange}
-                editTodoValue={editTodoValue}
-              />
-            }
-          </div>
-          : <Login
-            handleInputChange={this.handleInputChange}
-          />
-        }
+              </form>
+              {noTodo
+                ? <p className="general-message">{noTodoMessage}</p>
+                : <TodoList
+                  todoList={todoList}
+                  handleDeleteButton={this.handleDeleteButton}
+                  handEditButton={this.handEditButton}
+                  handleUpdateButton={this.handleUpdateButton}
+                  inputValue={this.state.inputValue}
+                  handleInputChange={this.handleInputChange}
+                  editTodoValue={editTodoValue}
+                />
+              }
+            </div>
+            : <Login
+              email={email}
+              password={password}
+              handleInputChange={this.handleInputChange}
+              handleLoginButton={this.handleLoginButton}
+            />
+          }
 
 
-      </div>
+        </div>
+      </>
     )
   }
 }
