@@ -24,12 +24,13 @@ export default class App extends Component {
         toggleEdit: false
       }
     ],
-    isAuth: false,
+    isAuth: true,
     inputValue: "",
     submitError: false,
     submitErrorMessage: "",
     noTodo: false,
     noTodoMessage: "",
+    editTodoValue: "",
   }
 
 
@@ -38,6 +39,9 @@ export default class App extends Component {
     this.setState({
       [event.target.name]: event.target.value
     })
+    // console.log(this.state)
+    // console.log(this.target.name)
+    // console.log(this.target.value)
   }
 
   handleAddButton = (event) => {
@@ -86,29 +90,43 @@ export default class App extends Component {
   }
 
   handEditButton = (targetId) => {
-    console.log(targetId)
     let copyTodoList = [...this.state.todoList]
+
+    let updateTodo
     copyTodoList.map(item => {
       if (item.id === targetId) {
         item.toggleEdit = true
+        updateTodo = item.name
+        item.disableButton = false
       }
-      // else {
-      //   item.toggleEdit=false
-      // }
+      else {
+        item.toggleEdit = false
+        item.disableButton = true
+      }
+      console.log('line106', item)
       return item
     })
-
-    console.log(copyTodoList)
     this.setState({
-      todoList: copyTodoList
+      todoList: copyTodoList,
+      editTodoValue: updateTodo
     })
   }
 
-  handleUpdateButton = (id) => {
-    console.log('this is id in line 0=106', id)
-    console.log(this.state.inputValue)
-    // let copyArr = [...this.state.todoList]
+  handleUpdateButton = (event) => {
+    event.preventDefault()
+    let copyArr = [...this.state.todoList]
 
+    copyArr.map((item) => {
+      if (item.toggleEdit === true) {
+        item.name = this.state.editTodoValue
+      }
+      item.toggleEdit = false
+      item.disableButton = false
+      return item
+    })
+    this.setState({
+      todoList: copyArr
+    })
 
   }
 
@@ -119,7 +137,8 @@ export default class App extends Component {
       submitErrorMessage,
       noTodo,
       noTodoMessage,
-      isAuth
+      isAuth,
+      editTodoValue
     } = this.state
     return (
       <div>
@@ -135,7 +154,7 @@ export default class App extends Component {
               ></input>
 
               <button
-                className="edit"
+                className="blue-button"
                 onClick={this.handleAddButton}
               >Add</button>
 
@@ -149,10 +168,13 @@ export default class App extends Component {
                 handleUpdateButton={this.handleUpdateButton}
                 inputValue={this.state.inputValue}
                 handleInputChange={this.handleInputChange}
+                editTodoValue={editTodoValue}
               />
             }
           </div>
-          : <Login />
+          : <Login
+            handleInputChange={this.handleInputChange}
+          />
         }
 
 

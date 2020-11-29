@@ -1,35 +1,36 @@
 import React from 'react'
 import '../App.css'
 
-const TodoList = ({ todoList, 
-    handleDeleteButton, 
-    handEditButton, 
-    handleUpdateButton, 
+const TodoList = ({ todoList,
+    handleDeleteButton,
+    handEditButton,
+    handleUpdateButton,
     inputValue,
-    handleInputChange }) => {
+    handleInputChange,
+    editTodoValue }) => {
 
     return (
-        todoList.map(({ id, name, toggleEdit }) => {
+        todoList.map(({ id, name, toggleEdit, disableButton }) => {
             return (
                 <li key={id}>
                     {toggleEdit
                         ? <form>
-                            <input></input>
+                            <input
+                                name="editTodoValue"
+                                value={editTodoValue}
+                                type="text"
+                                onChange={(event) => handleInputChange(event)}
+                            ></input>
                             <button
-                                // onChange={handleInputChange}
-                                // name="inputValue"
-                                // // value={inputValue}
-                                // value = {inputValue}
-                                // type="text"
-                                // className="edit"
-                                // onClick={handleUpdateButton(id)}
+                                className={disableButton ? "disable" : "blue-button"}
+                                onClick={(event) => handleUpdateButton(event)}
                             >Update</button>
                         </form>
                         :
                         <>
                             {name}
                             <button
-                                className="edit"
+                                className={disableButton ? "disable" : "blue-button"}
                                 onClick={() => handEditButton(id)}
                             >Edit</button>
                         </>

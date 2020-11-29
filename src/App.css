@@ -28,7 +28,7 @@ button {
   border-radius: 4px;
 }
 
-.edit {
+.blue-button {
   background-color: dodgerblue;
 }
 
@@ -42,8 +42,8 @@ button {
 }
 
 .disable {
-  background-color: grey;
-  
+  background-color: darkgrey;  
+  pointer-events: none;
 }
 .delete {
   background-color: crimson;
