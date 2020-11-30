@@ -1,50 +1,103 @@
+// command: rafcp
+//<React.Fragment></React.Fragment> = <> </> to wrap more than one html tag
 import React from 'react'
-import '../../App.css'
+import { arrayOf, shape, string } from 'prop-types'
+import "./todo.css"
+import Span from "../shared/Span"
 
 const TodoList = ({
     todoList,
-    handleDeleteButton,
-    handEditButton,
-    handleUpdateButton,
-    handleInputChange,
-    editTodoValue }) => {
-        console.log(todoList)
+    handleDeleteTodo,
+    handleEditTodo,
+    handleOnChange,
+    editValue,
+    disableEditButton,
+    handleUpdateButton
+}) => {
+    console.log('=========')
+    console.log(todoList)
 
-    return (   
-        todoList.map(({ id, name, toggleEdit, disableButton }) => {
-            return (
-                <div className='body-div'>
-                    <li key={id}>
-                        {toggleEdit
-                            ? <form>
-                                <input
-                                    name="editTodoValue"
-                                    value={editTodoValue}
-                                    type="text"
-                                    onChange={(event) => handleInputChange(event)}
-                                ></input>
-                                <button
-                                    className={disableButton ? "disable" : "blue-button"}
-                                    onClick={(event) => handleUpdateButton(event)}
-                                >Update</button>
-                            </form>
-                            :
-                            <>
-                                {name}
-                                <button
-                                    className={disableButton ? "disable" : "blue-button"}
-                                    onClick={() => handEditButton(id)}
-                                >Edit</button>
-                            </>
-                        }
+    const handleDeleteButton = (id) => {
+        console.log('ID:', id)
+        handleDeleteTodo(id)
+    }
 
-                        <button
-                            className="delete"
-                            onClick={() => handleDeleteButton(id)}
-                        >Delete</button>
-                    </li>
-                </div>
-            )
+    return (
+        <ul style={{ listStyle: "none" }}>
+            {todoList.map(({ _id, todo, editToggle }) => {
+
+                return (
+                    <>
+                        <li key={_id} style={{ margin: 20 }}>
+                            {/* {todo}{" "} */}
+                            {editToggle
+                                ? (
+                                    <input
+                                        onChange={(event) => handleOnChange(event)}
+                                        type='text'
+                                        value={editValue}
+                                        name='editValue'
+                                        defaultValue={todo}
+                                    >
+                                    </input>
+                                )
+                                : (
+                                // <span>{todo}</span>
+                                <Span value = {todo} />
+                                )
+                            }
+                            {
+                            editToggle
+                                ? (
+                                    // <span onClick={() => handleUpdateButton(id)}
+                                    //     className="edit-button todo-button-shared-style" > update</span>
+                                    <Span 
+                                    value = {"Update"}
+                                    id = {_id}
+                                    onClick = {handleUpdateButton}
+                                    className = {`edit-button todo-button-shared-style`}
+                                    />
+                                )
+                                : (
+                                    // <span onClick={() => handleEditTodo(id)}
+                                    //     className={`edit-button todo-button-shared-style ${disableEditButton ? "disabled-button" : ""}`} >Edit</span>
+                                    <Span 
+                                    value = {"Edit"}
+                                    id = {_id}
+                                    onClick = {handleEditTodo}
+                                    className = {`edit-button todo-button-shared-style`}
+                                    disabledClass = "disabled-button"
+                                    disabledButton = {disableEditButton}
+                                    />
+                                )
+                          
+                            }
+
+                            {/* <span className={`delete-button todo-button-shared-style ${disableEditButton ? "disabled-button" : ""}`}
+                                onClick={() => handleDeleteButton(id)}>Delete</span> */}
+
+                            <Span
+                                value={"Delete"}
+                                id={_id}
+                                onClick={handleDeleteButton}
+                                className= {`delete-button todo-button-shared-style`}
+                                disabledClass="disabled-button"
+                                disabledButton={disableEditButton}
+                            />
+                        </li>
+                    </>
+                );
+            })} 
+        </ul>
+
+    )
+}
+
+TodoList.propTypes = {
+    todoList: arrayOf(
+        shape({
+            id: string.isRequired,
+            todo: string.isRequired,
         })
     )
 }

@@ -215,7 +215,10 @@ console.log('line159', isAuth)
                             onChange={this.handleOnChangePassword}
                             value={password}
                         /><br />{" "}
-                        <button className='blue-button'>Register</button>
+                        <button 
+                        className='blue-button'
+                        onClick={this.handleOneSubmit}
+                        >Register</button>
 
                     </form>
                 </>

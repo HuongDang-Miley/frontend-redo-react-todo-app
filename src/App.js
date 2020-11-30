@@ -180,14 +180,13 @@ export default class App extends Component {
     return (
       <Router>
         <Nav
-          isAuth={isAuth}
-          handleLoginLink={this.handleLoginLink}
-          handleLogoutLink={this.handleLogoutLink}
-        />
+          isAuth={this.state.isAuth}
+          user={this.state.user}
+          logout={this.logout} />
 
         <Switch>
 
-        <Route
+          <Route
             exact
             path="/home"
             component={Home}>
