@@ -2,10 +2,7 @@ import React, { Component } from 'react'
 import Todo from '../todo/Todo'
 import validator from 'validator'
 import axios from 'axios'
-import '../../App.css'
 import Message from "../shared/Message"
-import jwtDecode from 'jwt-decode'
-import { getLocalStorageToken } from '../utils/helpers'
 
 
 export class Register extends Component {
@@ -23,28 +20,6 @@ export class Register extends Component {
         successMessage: 'success.data.message'
     }
 
-    componentDidMount() {
-        let token = getLocalStorageToken()
-        console.log('token in register',token)
-
-        if (token) {
-            let decoded = jwtDecode(token)
-            let currentTime = Date.now() / 1000
-
-            if (decoded.exp < currentTime) {
-                localStorage.removeItem("jwtToken")
-
-            } else {
-                this.setState({
-                    isAuth: true,
-                    user: {
-                        email: decoded.email,
-                        _id: decoded._id
-                    }
-                })
-            }
-        }
-    }y
 
 
     handleOnChange = (event) => {
@@ -142,9 +117,7 @@ export class Register extends Component {
                 email: email,
                 password: password
             })
-            console.log('success', success.data.message)
-
-            localStorage.setItem('jwtToken', success.data.jwtToken,)
+            console.log('scucess', success.data.message)
             
             this.setState({
                 isAuth: true,
@@ -152,18 +125,15 @@ export class Register extends Component {
                 successMessage: success.data.message,
                 email: '',
                 password: '',
-            }, () => {
-                this.props.auth(success.data.jwtToken)
-                this.props.history.push("/todo")
             })
             
-            console.log('state', this.state)
+            console.log('scucess', this.state)
         }
         catch (e) {
             console.log('======')
             console.log(e)
-            // if (e && e.response.status === 401) {
-                if (e) {
+            if (e && e.response.status === 401) {
+                // if (e) {
                 this.setState({
                     isAuth: false,
                     isSuccessMessage: false,
