@@ -33,6 +33,11 @@ margin-top: 24px;
 margin-left: 24px;
 }
 
+li {
+  margin-right: 16px;
+  color: dodgerblue;
+  display: inline;
+}
 a {
   margin-right: 32px;
   color: dodgerblue;
