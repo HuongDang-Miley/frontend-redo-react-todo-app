@@ -1,6 +1,7 @@
 .body-div {
   text-align: center;
   margin-top: 56px;
+  color: black;
   
 }
 
@@ -28,6 +29,14 @@ button {
   border-radius: 4px;
 }
 
+span {
+  display: inline-block;
+  padding: 12px;
+  color: black;
+  margin: 10px;
+  border-radius: 4px;
+}
+
 .navigation-div {
 margin-top: 24px;
 margin-left: 24px;
@@ -44,6 +53,7 @@ a {
 }
 .blue-button {
   background-color: dodgerblue;
+  color: white;
 }
 
 .login-button {
@@ -61,6 +71,7 @@ a {
 }
 .delete {
   background-color: crimson;
+  color: white
 }
 
 .error-message {

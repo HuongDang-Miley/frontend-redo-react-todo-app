@@ -42,7 +42,6 @@ const TodoView = ({
                                     </input>
                                 )
                                 : (
-                                // <span>{todo}</span>
                                 <Span value = {todo} />
                                 )
                             }
@@ -55,7 +54,7 @@ const TodoView = ({
                                     value = {"Update"}
                                     id = {_id}
                                     onClick = {handleUpdateButton}
-                                    className = {`edit-button todo-button-shared-style`}
+                                    className = {`blue-button`}
                                     />
                                 )
                                 : (
@@ -65,7 +64,7 @@ const TodoView = ({
                                     value = {"Edit"}
                                     id = {_id}
                                     onClick = {handleEditTodo}
-                                    className = {`edit-button todo-button-shared-style`}
+                                    className = {`blue-button`}
                                     disabledClass = "disabled-button"
                                     disabledButton = {disableEditButton}
                                     />
@@ -80,7 +79,7 @@ const TodoView = ({
                                 value={"Delete"}
                                 id={_id}
                                 onClick={handleDeleteButton}
-                                className= {`delete-button todo-button-shared-style`}
+                                className= {`delete`}
                                 disabledClass="disabled-button"
                                 disabledButton={disableEditButton}
                             />

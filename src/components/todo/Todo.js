@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import TodoView from "./TodoView";
-import {
-    apiRequest
-} from '../utils/helpers'
+import '../../App.css'
+import { apiRequest } from '../utils/helpers'
 import jwtDecode from 'jwt-decode'
 const jwt = require('jsonwebtoken')
 
@@ -229,7 +228,7 @@ export default class Todo extends Component {
                     type="text"
                     name="todoValue"
                     value={this.state.todoValue} />{""}
-                <button onClick={this.handleSubmit}>Add</button>
+                <button className = "blue-button" onClick={this.handleSubmit}>Add</button>
 
                 {showNoTodoMessage
                     ? (<div style={{ marginTop: 20 }}>Please Add Something To Do</div>)

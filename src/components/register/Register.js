@@ -117,8 +117,8 @@ export class Register extends Component {
                 email: email,
                 password: password
             })
-            console.log(success.data.message)
-
+            console.log('success', success.data.message)
+            
             this.setState({
                 isAuth: true,
                 isSuccessMessage: true,
@@ -126,9 +126,12 @@ export class Register extends Component {
                 email: '',
                 password: '',
             })
+            
+            console.log('state', this.state)
         }
         catch (e) {
-
+            console.log('======')
+            console.log(e)
             if (e && e.response.status === 401) {
                 // if (e) {
                 this.setState({
@@ -158,7 +161,7 @@ export class Register extends Component {
             isSuccessMessage,
             successMessage
         } = this.state
-
+     console.log('======')
         console.log('line159', isAuth)
 
         let showTodoComponent = isAuth
