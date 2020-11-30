@@ -20,7 +20,7 @@ export class Register extends Component {
         successMessage: 'success.data.message'
     }
 
-    
+
 
     handleOnChange = (event) => {
         this.setState({
@@ -30,7 +30,7 @@ export class Register extends Component {
 
             const { email } = this.state;
             let isEmail = validator.isEmail(email)
-            
+
             if (isEmail) {
                 this.setState({
                     isError: false,
@@ -128,8 +128,9 @@ export class Register extends Component {
             })
         }
         catch (e) {
-    
+
             if (e && e.response.status === 401) {
+                // if (e) {
                 this.setState({
                     isAuth: false,
                     isSuccessMessage: false,
@@ -158,13 +159,14 @@ export class Register extends Component {
             successMessage
         } = this.state
 
-console.log('line159', isAuth)
+        console.log('line159', isAuth)
 
         let showTodoComponent = isAuth
             ? <Todo />
             : (
                 <>
-                    <form onSubmit={this.handleOneSubmit}>
+                    <form
+                        onSubmit={this.handleOneSubmit}>
                         {" "}
                         {/* {isSuccessMessage
                             ? <p className="success-message">{successMessage}</p>
@@ -192,9 +194,10 @@ console.log('line159', isAuth)
                             : ("")
                         }
                         <input
+                            className="login-input"
                             type="text"
                             name="email"
-                            placeholder="enter email"
+                            placeholder="Enter Email"
                             onChange={this.handleOnChange}
                             value={email}
                         /><br />{" "}
@@ -209,15 +212,16 @@ console.log('line159', isAuth)
                             : ("")
                         }
                         <input
+                            className="login-input"
                             type="text"
                             name="password"
-                            placeholder="enter password"
+                            placeholder="Enter Password"
                             onChange={this.handleOnChangePassword}
                             value={password}
                         /><br />{" "}
-                        <button 
-                        className='blue-button'
-                        onClick={this.handleOneSubmit}
+                        <button
+                            className='blue-button login-button'
+                            onClick={this.handleOneSubmit}
                         >Register</button>
 
                     </form>

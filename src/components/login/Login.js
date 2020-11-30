@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import '../../App.css'
 
 export default class Login extends Component {
     state = {
@@ -25,40 +26,43 @@ export default class Login extends Component {
     }
 
     render() {
-        const {email, password} = this.state
-        
-        return (            
-        <div className="login-div">
-            <form>
-                <label>Email</label><br />
-                <input
-                    type='text'
-                    className="login-input"
-                    name="email"
-                    value={email}
-                    onChange={this.handleInputChange}
-                    // onChange={(event) => handleInputChange(event)}
-                >
-                </input><br />
+        const { email, password } = this.state
 
-                <label>Password</label><br />
-                <input
-                    type='text'
-                    className="login-input"
-                    name="password"
-                    value={password}
-                    onChange={this.handleInputChange}
+        return (
+            <div className="login-div">
+                <form>
+                    {/* <label>Email</label><br /> */}
+                    <input
+                        placeholder="Enter Email"
+                        type='text'
+                        className="login-input"
+                        name="email"
+                        value={email}
+                        onChange={this.handleInputChange}
                     // onChange={(event) => handleInputChange(event)}
-                >
-                </input><br />
-                <br />
-                <button
-                    className="blue-button login-button"
-                    onClick={this.handleLoginButton}
-                >Login</button>
-            </form>
-        </div>
-            
+                    >
+                    </input><br />
+
+                    {/* <label>Password</label><br /> */}
+                    <input
+                        placeholder="Enter Password"
+                        type='text'
+                        className="login-input"
+                        name="password"
+                        value={password}
+                        onChange={this.handleInputChange}
+                    // onChange={(event) => handleInputChange(event)}
+                    >
+                    </input>
+                    
+                    <br />
+                    <button
+                        className="blue-button login-button"
+                        onClick={this.handleLoginButton}
+                    >Login</button>
+                </form>
+            </div>
+
         )
     }
 }

@@ -5,7 +5,7 @@ import { arrayOf, shape, string } from 'prop-types'
 import "./todo.css"
 import Span from "../shared/Span"
 
-const TodoList = ({
+const TodoView = ({
     todoList,
     handleDeleteTodo,
     handleEditTodo,
@@ -93,7 +93,7 @@ const TodoList = ({
     )
 }
 
-TodoList.propTypes = {
+TodoView.propTypes = {
     todoList: arrayOf(
         shape({
             id: string.isRequired,
@@ -102,4 +102,4 @@ TodoList.propTypes = {
     )
 }
 
-export default TodoList
+export default TodoView

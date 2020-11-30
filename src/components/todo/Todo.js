@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-// import axios from "axios";
-import TodoList from "./TodoList";
+import axios from "axios";
+import TodoView from "./TodoView";
 import {
     apiRequest
 } from '../utils/helpers'
@@ -233,7 +233,7 @@ export default class Todo extends Component {
 
                 {showNoTodoMessage
                     ? (<div style={{ marginTop: 20 }}>Please Add Something To Do</div>)
-                    : (<TodoList
+                    : (<TodoView
                         todoList={todoList}
                         handleDeleteTodo={this.handleDeleteTodo}
                         handleEditTodo={this.handleEditTodo}
