@@ -28,7 +28,8 @@ const TodoView = ({
 
                 return (
                     <>
-                        <li key={_id} style={{ margin: 20 }}>
+                    <div className="body-div">
+                    <li key={_id} style={{ margin: 20 }}>
                             {/* {todo}{" "} */}
                             {editToggle
                                 ? (
@@ -84,6 +85,8 @@ const TodoView = ({
                                 disabledButton={disableEditButton}
                             />
                         </li>
+                    </div>
+                       
                     </>
                 );
             })} 

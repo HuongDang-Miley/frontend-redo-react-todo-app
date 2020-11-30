@@ -5,7 +5,7 @@ import axios from 'axios'
 import '../../App.css'
 import Message from "../shared/Message"
 import jwtDecode from 'jwt-decode'
-import {getLocalStorageToken} from '../utils/helpers'
+import { getLocalStorageToken } from '../utils/helpers'
 
 export class Login extends Component {
     state = {
@@ -70,24 +70,24 @@ export class Login extends Component {
         this.setState({
             [event.target.name]: event.target.value
         }
-        // , () => {
-        //     // // check if the input is an email
+            // , () => {
+            //     // // check if the input is an email
 
-        //     const { email } = this.state;
-        //     let isEmail = validator.isEmail(email)
-        //     // let isEmail = email.includes('@')
-        //     if (isEmail) {
-        //         this.setState({
-        //             isError: false,
-        //             errorMessage: ''
-        //         })
-        //     } else {
-        //         this.setState({
-        //             isError: true,
-        //             errorMessage: 'Please enter a correct email'
-        //         })
-        //     }
-        // }
+            //     const { email } = this.state;
+            //     let isEmail = validator.isEmail(email)
+            //     // let isEmail = email.includes('@')
+            //     if (isEmail) {
+            //         this.setState({
+            //             isError: false,
+            //             errorMessage: ''
+            //         })
+            //     } else {
+            //         this.setState({
+            //             isError: true,
+            //             errorMessage: 'Please enter a correct email'
+            //         })
+            //     }
+            // }
         )
     }
 
@@ -95,23 +95,23 @@ export class Login extends Component {
         this.setState({
             [event.target.name]: event.target.value
         }
-        // , () => {
-        //     const { password } = this.state
-        //     let isPassword = validator.matches(
-        //         password,
-        //         "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")
-        //     if (isPassword) {
-        //         this.setState({
-        //             isPasswordError: false,
-        //             isPasswordErrorMessage: ''
-        //         })
-        //     } else {
-        //         this.setState({
-        //             isPasswordError: true,
-        //             isPasswordErrorMessage: 'password must contain a lowercase, an uppercase, and a symbol',
-        //         })
-        //     }
-        // }
+            // , () => {
+            //     const { password } = this.state
+            //     let isPassword = validator.matches(
+            //         password,
+            //         "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$")
+            //     if (isPassword) {
+            //         this.setState({
+            //             isPasswordError: false,
+            //             isPasswordErrorMessage: ''
+            //         })
+            //     } else {
+            //         this.setState({
+            //             isPasswordError: true,
+            //             isPasswordErrorMessage: 'password must contain a lowercase, an uppercase, and a symbol',
+            //         })
+            //     }
+            // }
         )
     }
 
@@ -119,8 +119,7 @@ export class Login extends Component {
         event.preventDefault()
         const { email, password } = this.state
 
-        if (validator.isEmpty(email) && validator.isEmpty(password)) 
-        {
+        if (validator.isEmpty(email) && validator.isEmpty(password)) {
             this.setState({
                 // isSubmitError: true,
                 // submitErrorMessage: 'cannot have empty email or password'
@@ -179,7 +178,7 @@ export class Login extends Component {
 
             localStorage.setItem('jwtToken', success.data.jwtToken,)
             console.log('success in line 119', success)
-            
+
             this.setState({
                 email: '',
                 password: '',
@@ -192,11 +191,7 @@ export class Login extends Component {
 
         }
         catch (e) {
-            // e in axios always come with response data, so I can put e.response
             console.log(e)
-            // console.log(e.response)
-            // // console.log(e.response.status)
-            // console.log(e.response.data.message)
 
             let errorMessage = e.toString()
             if (errorMessage === "Error: Network Error") {
@@ -231,8 +226,8 @@ export class Login extends Component {
                     errorMessage: e.response.data.message
                 })
                 return;
-            } 
-          
+            }
+
 
             console.log('line173', this.state.isAuth)
         }
@@ -251,40 +246,44 @@ export class Login extends Component {
             notAuthenticMessage,
         } = this.state
 
-      
+
         return (
             <div style={{ textAlign: "center", marginTop: 20 }}>
                 {/* {showTodoComponent} */}
                 <form onSubmit={this.handleOneSubmit}>
-                        {" "}
-                        {isAuth
-                            ? (<Message className={'error-message'} message={notAuthenticMessage} />)
-                            : ("")
-                        }
-                        
-                        {isError
-                            ? (<Message className={'error-message'} message={errorMessage} />)
-                            : ("")
-                        }
-                        <input
-                            type="text"
-                            name="email"
-                            placeholder="enter email"
-                            onChange={this.handleOnChange}
-                            value={email}
-                        /><br />{" "}
+                    {" "}
+                    {isAuth
+                        ? (<Message className={'error-message'} message={notAuthenticMessage} />)
+                        : ("")
+                    }
 
-                        <input
-                            type="text"
-                            name="password"
-                            placeholder="enter password"
-                            onChange={this.handleOnChange}
-                            value={password}
-                        /><br />{" "}
-                        <button>Login</button>
+                    {isError
+                        ? (<Message className={'error-message'} message={errorMessage} />)
+                        : ("")
+                    }
+                    <input
+                        className="login-input"
+                        type="text"
+                        name="email"
+                        placeholder="enter email"
+                        onChange={this.handleOnChange}
+                        value={email}
+                    /><br />{" "}
 
-                    </form>
-                
+                    <input
+                        className="login-input"
+                        type="text"
+                        name="password"
+                        placeholder="enter password"
+                        onChange={this.handleOnChange}
+                        value={password}
+                    /><br />{" "}
+                    <button
+                        className="blue-button login-button"
+                    >Login</button>
+
+                </form>
+
             </div>
         )
     }
