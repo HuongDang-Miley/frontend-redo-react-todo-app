@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { Component } from 'react'
 import validator from 'validator'
 
@@ -54,13 +55,22 @@ export default class Register extends Component {
 
     }
 
-    handleRegisterButton = (event) => {
+    handleRegisterButton = async (event) => {
         event.preventDefault()
         let { emailError, passwordError } = this.state
         if (emailError === false && passwordError === false) {
             console.log('click on register button')
             this.props.history.push("/todo");
         }
+
+        try {
+            let newUser = await axios.post('http://localhost:3003/api/users/create-user', {
+                email: this.state.email,
+                password: this.state.password
+            })
+            console.log('newUser', newUser)
+        }
+        catch (e) { console.log(e.message) }
 
     }
 
