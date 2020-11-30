@@ -1,5 +1,5 @@
 import React from 'react'
-import '../App.css'
+import '../../App.css'
 
 const TodoList = ({
     todoList,
@@ -8,6 +8,7 @@ const TodoList = ({
     handleUpdateButton,
     handleInputChange,
     editTodoValue }) => {
+        console.log(todoList)
 
     return (   
         todoList.map(({ id, name, toggleEdit, disableButton }) => {

@@ -1,14 +1,33 @@
-import React from 'react'
-import './login.css'
+import React, { Component } from 'react'
 
-const Login = ({
-    email,
-    password,
-    handleInputChange,
-    handleLoginButton
-}) => {
+export default class Login extends Component {
+    state = {
+        email: '',
+        password: ''
+    }
 
-    return (
+    handleInputChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
+    handleLoginButton = () => {
+        if (this.state.email === '' && this.state.password === '') {
+            this.setState({
+                isAuth: false
+            })
+            return;
+        }
+        this.setState({
+            isAuth: true
+        })
+    }
+
+    render() {
+        const {email, password} = this.state
+        
+        return (            
         <div className="login-div">
             <form>
                 <label>Email</label><br />
@@ -17,7 +36,8 @@ const Login = ({
                     className="login-input"
                     name="email"
                     value={email}
-                    onChange={(event) => handleInputChange(event)}
+                    onChange={this.handleInputChange}
+                    // onChange={(event) => handleInputChange(event)}
                 >
                 </input><br />
 
@@ -27,18 +47,18 @@ const Login = ({
                     className="login-input"
                     name="password"
                     value={password}
-                    onChange={(event) => handleInputChange(event)}
+                    onChange={this.handleInputChange}
+                    // onChange={(event) => handleInputChange(event)}
                 >
                 </input><br />
                 <br />
                 <button
                     className="blue-button login-button"
-                    onClick={() => handleLoginButton()}
+                    onClick={this.handleLoginButton}
                 >Login</button>
             </form>
         </div>
-    )
-
+            
+        )
+    }
 }
-
-export default Login
