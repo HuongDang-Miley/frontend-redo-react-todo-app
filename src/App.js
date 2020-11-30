@@ -62,7 +62,7 @@ class App extends Component {
       <Router>
         <Nav isAuth={this.state.isAuth} user={this.state.user} logout={this.logout} />
         <Switch>
-          <Route path="/register" component={Register} />
+          <Route path="/register" component={Register} auth={this.auth} />
 
           <Route
             exact path="/login"
