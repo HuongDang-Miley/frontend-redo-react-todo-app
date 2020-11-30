@@ -1,16 +1,18 @@
 import React from 'react'
 
-export const Nav = ({ isAuth }) => {
-    console.log(isAuth)
+export const Nav = ({
+    isAuth,
+    handleLogoutLink,
+    handleLoginLink }) => {
     return (
-        <div className = "navigation-div">
+        <div className="navigation-div">
             {isAuth
                 ? <>
                     <a>Email</a>
-                    <a>Logout</a>
+                    <a onClick={() => handleLogoutLink()}>Logout</a>
                 </>
                 : <>
-                    <a>Login</a>
+                    <a onClick={()=>handleLoginLink()}>Login</a>
                     <a>Register</a>
                 </>}
         </div>

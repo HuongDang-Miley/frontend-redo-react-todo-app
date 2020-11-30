@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import { v4 as uuidv4 } from "uuid";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom"
 import './App.css'
 import TodoList from './components/TodoList'
 import Login from './components/login/Login'
+import Register from './components/register/Register'
 import Nav from './components/nav/Nav'
+import Home from './components/home/Home'
+
 
 
 export default class App extends Component {
@@ -25,7 +29,7 @@ export default class App extends Component {
         toggleEdit: false
       }
     ],
-    isAuth: false,
+    isAuth: true,
     inputValue: "",
     submitError: false,
     submitErrorMessage: "",
@@ -34,6 +38,7 @@ export default class App extends Component {
     editTodoValue: "",
     email: "",
     password: "",
+    register: false
   }
 
 
@@ -139,9 +144,24 @@ export default class App extends Component {
       })
       return;
     }
-
     this.setState({
       isAuth: true
+    })
+  }
+
+  handleLogoutLink = () => {
+    this.setState({
+      isAuth: false
+    })
+  }
+  handleLoginLink = () => {
+    this.setState({
+      isAuth: false
+    })
+  }
+  handleRegisterLink = () => {
+    this.setState({
+      register: true
     })
   }
 
@@ -157,10 +177,59 @@ export default class App extends Component {
       email,
       password
     } = this.state
+    console.log('isAuth line 180', isAuth)
     return (
-      <>
-        <Nav isAuth = {isAuth}/>
-        <div className = 'body-div'> 
+      <Router>
+        <Nav
+          isAuth={isAuth}
+          handleLoginLink={this.handleLoginLink}
+          handleLogoutLink={this.handleLogoutLink}
+        />
+
+        <Switch>
+          <Route
+            exact
+            path="/home"
+            component={Home}>
+          </Route>
+
+          <Route
+            exact
+            path="/login"
+            component={Login}>
+          </Route>
+
+          <Route
+            exact
+            path="/register"
+            component={Register}>
+          </Route>
+
+          <Route exact path="/todo">
+            {isAuth
+              ? <TodoList
+                todoList={todoList}
+                handleDeleteButton={this.handleDeleteButton}
+                handEditButton={this.handEditButton}
+                handleUpdateButton={this.handleUpdateButton}
+                inputValue={this.state.inputValue}
+                handleInputChange={this.handleInputChange}
+                editTodoValue={editTodoValue}
+              />
+              : <Redirect to="/login" />}
+          </Route>
+
+        </Switch>
+
+
+
+      </Router>
+    )
+    {/* <Nav
+          isAuth={isAuth}
+          handleLoginLink={this.handleLoginLink}
+          handleLogoutLink={this.handleLogoutLink} />
+        <div className='body-div'>
           {isAuth
             ? <div>
               {submitError ? <p className="error-message">{submitErrorMessage}</p> : ""}
@@ -196,12 +265,14 @@ export default class App extends Component {
               password={password}
               handleInputChange={this.handleInputChange}
               handleLoginButton={this.handleLoginButton}
+              handleLogoutLink={this.handleLogoutLink}
             />
+            
           }
 
 
-        </div>
-      </>
-    )
+        </div> */}
+
+
   }
 }
