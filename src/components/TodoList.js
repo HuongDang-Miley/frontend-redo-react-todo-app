@@ -9,7 +9,7 @@ const TodoList = ({
     handleInputChange,
     editTodoValue }) => {
 
-    return (
+    return (   
         todoList.map(({ id, name, toggleEdit, disableButton }) => {
             return (
                 <div className='body-div'>

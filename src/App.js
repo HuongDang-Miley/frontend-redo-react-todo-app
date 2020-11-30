@@ -7,6 +7,7 @@ import Login from './components/login/Login'
 import Register from './components/register/Register'
 import Nav from './components/nav/Nav'
 import Home from './components/home/Home'
+import PrivateRoute from './components/PrivateRoute'
 
 
 
@@ -154,6 +155,7 @@ export default class App extends Component {
       isAuth: false
     })
   }
+
   handleLoginLink = () => {
     this.setState({
       isAuth: false
@@ -196,7 +198,14 @@ export default class App extends Component {
           <Route
             exact
             path="/login"
-            component={Login}>
+            component={(props) => <Login
+              {...props}
+              isAuth={this.isAuth}
+              email={email}
+              password={password}
+              handleInputChange={this.handleInputChange}
+              handleLoginButton={this.handleLoginButton}
+              handleLogoutLink={this.handleLogoutLink} />}>
           </Route>
 
           <Route
@@ -205,19 +214,16 @@ export default class App extends Component {
             component={Register}>
           </Route>
 
-          <Route exact path="/todo">
-            {isAuth
-              ? <TodoList
-                todoList={todoList}
-                handleDeleteButton={this.handleDeleteButton}
-                handEditButton={this.handEditButton}
-                handleUpdateButton={this.handleUpdateButton}
-                inputValue={this.state.inputValue}
-                handleInputChange={this.handleInputChange}
-                editTodoValue={editTodoValue}
-              />
-              : <Redirect to="/login" />}
-          </Route>
+          <PrivateRoute
+            exact
+            path="/todo"
+            isAuth={this.state.isAuth}
+            user={this.state.user}
+            component={TodoList}
+          />
+
+
+
 
         </Switch>
 
