@@ -1,9 +1,13 @@
 import axios from 'axios'
 import React, { Component } from 'react'
 import validator from 'validator'
+// import localStorage from 'jwtToken'
+import jwtDecode from 'jwt-decode'
+const jwt = require('jsonwebtoken')
 
 export default class Register extends Component {
     state = {
+        isAuth: false,
         email: '',
         password: '',
         emailError: true,
@@ -11,6 +15,13 @@ export default class Register extends Component {
         passwordError: true,
         passwordErrorMessage: '',
         successMessage: '',
+    }
+
+    componentDidMount(){
+        // let jwtToken = localStorage.getItem('jwtToken')
+        // console.log('jwtToken', jwtToken)
+        // let decoded = jwtDecode(jwtToken)
+        // console.log('decoded', decoded)
     }
 
     handleEmailInputChange = (event) => {
@@ -60,7 +71,8 @@ export default class Register extends Component {
         let { emailError, passwordError } = this.state
         if (emailError === false && passwordError === false) {
             console.log('click on register button')
-            this.props.history.push("/todo");
+            console.log('props',this.props)
+            // this.props.history.push("/todo");
         }
 
         try {
@@ -68,7 +80,22 @@ export default class Register extends Component {
                 email: this.state.email,
                 password: this.state.password
             })
+
+            // let token = localStorage.getItem('jwtToken')
+            localStorage.setItem('jwtToken', newUser.data.jwtToken)
+            // console.log('token', token)
             console.log('newUser', newUser)
+            console.log('newUser jwtToken', newUser.data.jwtToken)
+
+            this.setState({
+                isAuth: true,
+                successMessage: newUser.data.message,
+            }, 
+            // () => {
+            //     // this.props.auth(success.data.jwtToken)
+            //     this.props.history.push("/todo")
+            // }
+            )
         }
         catch (e) { console.log(e.message) }
 

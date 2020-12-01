@@ -18,19 +18,24 @@ class App extends Component {
 
   auth = (jwtToken) => {
     let decoded = jwtDecode(jwtToken)
-    console.log("line 17", jwtToken)
+    console.log("line 21", jwtToken)
+    console.log("line 22", decoded)
     this.setState({
       isAuth: true,
       user: {
         email: decoded.email,
         _id: decoded._id,
       }
+    }, ()=> {
+      console.log("check state in Auth", this.state)
+
     })
   }
 
   componentDidMount() {
-    // let token = localStorage.getItem("jwtToken");
-    let token = getLocalStorageToken()
+    let token = localStorage.getItem("jwtToken");
+    // let token = getLocalStorageToken()
+    console.log('token', token)
     if (token !== null) {
       let decoded = jwtDecode(token);
       let currentTime = Date.now() / 1000;
@@ -58,6 +63,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('check state in App render' , this.state)
     return (
       <Router>
         <Nav isAuth={this.state.isAuth} user={this.state.user} logout={this.logout} />
@@ -67,6 +73,7 @@ class App extends Component {
           <Route
             exact path="/login"
             component={(props) => <Login {...props} auth={this.auth} />}
+            // component={(props) => <Login {...props}  />}
           />
           <PrivateRoute
             exact

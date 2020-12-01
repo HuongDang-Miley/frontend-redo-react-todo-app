@@ -177,18 +177,18 @@ export class Login extends Component {
             })
 
             localStorage.setItem('jwtToken', success.data.jwtToken,)
-            console.log('success in line 119', success)
 
+            // once login successfully, set State Auth to true
             this.setState({
-                email: '',
-                password: '',
                 isAuth: true,
-                errorMessage: ''
             }, () => {
                 this.props.auth(success.data.jwtToken)
+                console.log('check props', this.props.auth)
                 this.props.history.push("/todo")
+                console.log('check state', this.state)
             })
-
+            
+            console.log('check state once login success', this.state)
         }
         catch (e) {
             console.log(e)
@@ -203,14 +203,14 @@ export class Login extends Component {
                 return;
             }
 
-            if (e.response.status === 401) {
-                this.setState({
-                    isAuth: false,
-                    isError: true,
-                    errorMessage: e.response.data.message
-                })
-                return;
-            }
+            // if (e.response.status === 401) {
+            //     this.setState({
+            //         isAuth: false,
+            //         isError: true,
+            //         errorMessage: e.response.data.message
+            //     })
+            //     return;
+            // }
             else if (e.response.status === 404) {
                 this.setState({
                     isAuth: false,
