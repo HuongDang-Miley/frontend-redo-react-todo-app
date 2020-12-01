@@ -37,26 +37,17 @@ export default class Nav extends Component {
 
 
     componentDidUpdate = (preState, preProps) => {
-        // console.log('preState', preState)
-        // console.log('thisState', this.state)
-        // console.log('preProps', preProps)
-        // console.log('thisProps', this.props)
         if (this.props.isAuth !== preState.isAuth
             && this.props.user !== preState.user) {
             this.setState({
                 isAuth: this.props.isAuth,
                 user: this.props.user
-                // user: {
-                //     email: this.props.user.email,
-                //     _id: this.props.user._id,
-                // }
             })
         }
     }
 
     logout = () => {
-        localStorage.removeItem("jwtToken");
-        // remove token from App.js
+        // localStorage.removeItem("jwtToken");
         this.props.logout();
     
         }
@@ -65,8 +56,6 @@ export default class Nav extends Component {
 
     render() {
         const { isAuth, user } = this.props
-        console.log('isAuth line 44 from Nav', isAuth)
-        console.log('user line 45 from Nav', user)
         return (
             isAuth && user
                 ? (

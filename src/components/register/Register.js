@@ -17,7 +17,7 @@ export default class Register extends Component {
         successMessage: '',
     }
 
-    componentDidMount(){
+    componentDidMount() {
         // let jwtToken = localStorage.getItem('jwtToken')
         // console.log('jwtToken', jwtToken)
         // let decoded = jwtDecode(jwtToken)
@@ -39,7 +39,6 @@ export default class Register extends Component {
                     emailErrorMessage: 'Please enter valid Email',
                 })
             }
-            console.log('check state email', this.state)
         })
     }
 
@@ -71,7 +70,7 @@ export default class Register extends Component {
         let { emailError, passwordError } = this.state
         if (emailError === false && passwordError === false) {
             console.log('click on register button')
-            console.log('props',this.props)
+            console.log('props', this.props)
             // this.props.history.push("/todo");
         }
 
@@ -81,21 +80,18 @@ export default class Register extends Component {
                 password: this.state.password
             })
 
-            // let token = localStorage.getItem('jwtToken')
             localStorage.setItem('jwtToken', newUser.data.jwtToken)
-            // console.log('token', token)
             console.log('newUser', newUser)
             console.log('newUser jwtToken', newUser.data.jwtToken)
 
             this.setState({
-                isAuth: true,
-                successMessage: newUser.data.message,
-            }, 
-            // () => {
-            //     // this.props.auth(success.data.jwtToken)
-            //     this.props.history.push("/todo")
-            // }
-            )
+                isAuth: true
+            }, () => {
+                this.props.auth(newUser.data.jwtToken)
+                this.props.history.push("/todo")
+                console.log('check props in register', this.props)
+            })
+
         }
         catch (e) { console.log(e.message) }
 

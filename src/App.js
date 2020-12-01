@@ -26,7 +26,7 @@ class App extends Component {
         email: decoded.email,
         _id: decoded._id,
       }
-    }, ()=> {
+    }, () => {
       console.log("check state in Auth", this.state)
 
     })
@@ -63,17 +63,22 @@ class App extends Component {
   }
 
   render() {
-    console.log('check state in App render' , this.state)
+    console.log('check state in App render', this.state)
     return (
       <Router>
         <Nav isAuth={this.state.isAuth} user={this.state.user} logout={this.logout} />
         <Switch>
-          <Route path="/register" component={Register} auth={this.auth} />
+          {/* <Route path="/register" component={Register} auth={this.auth} /> */}
+          <Route
+            exact
+            path="/register"
+            component={(props) => <Register {...props} auth={this.auth} />}
+          />
 
           <Route
             exact path="/login"
             component={(props) => <Login {...props} auth={this.auth} />}
-            // component={(props) => <Login {...props}  />}
+          // component={(props) => <Login {...props}  />}
           />
           <PrivateRoute
             exact
