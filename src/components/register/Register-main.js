@@ -113,7 +113,10 @@ export class Register extends Component {
         }
 
         try {
-            let success = await axios.post('http://localhost:3003/api/users/create-user', {
+            // if use server
+            let success = await axios.post('/api/users/create-user', {
+            // If use localhost
+            // let success = await axios.post('http://localhost:3003/api/users/create-user', {
                 email: email,
                 password: password
             })
