@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { getLocalStorageToken } from '../utils/helpers'
 import axios from "axios";
 import TodoView from "./TodoView";
 import '../../App.css'
@@ -164,8 +165,12 @@ export default class Todo extends Component {
 
     handleSubmit = async (event) => {
         event.preventDefault();
+        console.log('check props in todo', this.props)
+        // let jwtToken = localStorage.setItem('jwtToken', this.props.user)
         // let jwtToken = getLocalStorageToken()
         // let decoded = jwtDecode(jwtToken)
+        // console.log('jwtToken', jwtToken)
+        // console.log('id of current user', decoded._id)
 
         // if (this.state)
 
@@ -181,15 +186,16 @@ export default class Todo extends Component {
             //     {
             //         todo: this.state.todoValue,
             //         // way 1: put user, author to prop in private route and implement as below
-            //         _id: this.props.user._id
+            //         // _id: this.props.user._id
             //         // way 2:
-            //         // _id: decoded._id
+            //         _id: decoded._id
             //     },
-            //     {
-            //         headers: {
-            //             authorization: `Bearer ${jwtToken}`,
-            //         }
-            //     })
+            //     // {
+            //     //     headers: {
+            //     //         authorization: `Bearer ${jwtToken}`,
+            //     //     }
+            //     // }
+            //     )
 
             // let createdTodo = await handleSubmitTodoAPI(this.state.todoValue)
 

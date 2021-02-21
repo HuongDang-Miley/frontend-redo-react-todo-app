@@ -60,7 +60,6 @@ export default class Register extends Component {
                     passwordErrorMessage: 'Password must contain at least an uppercase, a lowercase, a symbol, and a number',
                 })
             }
-            console.log('check state pw', this.state)
         })
 
     }
@@ -68,11 +67,9 @@ export default class Register extends Component {
     handleRegisterButton = async (event) => {
         event.preventDefault()
         let { emailError, passwordError } = this.state
-        if (emailError === false && passwordError === false) {
-            console.log('click on register button')
-            console.log('props', this.props)
-            // this.props.history.push("/todo");
-        }
+        // if (emailError === false && passwordError === false) {
+        //     console.log('props', this.props)
+        // }
 
         try {
             let newUser = await axios.post('http://localhost:3003/api/users/create-user', {
