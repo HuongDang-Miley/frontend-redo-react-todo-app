@@ -91,7 +91,10 @@ export const getDecodedToken = () => {
 
 export const apiRequest = async (requestType, dataOjb = {}) => {
     let decodedId = getDecodedToken();
-    let baseURL = `http://localhost:3003/api`
+    // if use in server
+    let baseURL = `/api`
+    // if use locally
+    // let baseURL = `http://localhost:3003/api`
     let apiURL
 
     switch (requestType) {

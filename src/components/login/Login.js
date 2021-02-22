@@ -171,7 +171,10 @@ export class Login extends Component {
         }
 
         try {
-            let success = await axios.post('http://localhost:3003/api/users/login', {
+            // if use in server
+            let success = await axios.post('/api/users/login', {
+                // If use locally
+            // let success = await axios.post('http://localhost:3003/api/users/login', {
                 email: email,
                 password: password
             })

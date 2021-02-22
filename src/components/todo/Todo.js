@@ -33,7 +33,11 @@ export default class Todo extends Component {
         let decoded = jwtDecode(jwtToken)
         try {
             // `axios return the id of the deleted todo from backend
-            let deleteTodoId = await axios.delete(`http://localhost:3003/api/todo/delete-todo`,
+            
+            // if use in server
+            let deleteTodoId = await axios.delete(`/api/todo/delete-todo`,
+            // if use locally
+            // let deleteTodoId = await axios.delete(`http://localhost:3003/api/todo/delete-todo`,
                 {
                     data: {
                         userId: decoded._id,
