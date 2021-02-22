@@ -72,7 +72,10 @@ export default class Register extends Component {
         // }
 
         try {
-            let newUser = await axios.post('http://localhost:3003/api/users/create-user', {
+            // If use in server
+            let newUser = await axios.post('/api/users/create-user', {
+                // If use locally
+                // let newUser = await axios.post('http://localhost:3003/api/users/create-user', {
                 email: this.state.email,
                 password: this.state.password
             })
